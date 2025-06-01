@@ -2,7 +2,8 @@
 # 🧑‍💼 Employee Management System - Backend
 
 A role-based Employee Management System built with **Node.js**, **Express**, and **MongoDB**.  
-Admins can manage employees, departments, and locations, while employees can view and update their own profile.
+Admins can manage employees, departments, and locations, while employees can view and update their own profile.  
+HR can add employees, and Managers can view all employees.
 
 ---
 
@@ -11,11 +12,17 @@ Admins can manage employees, departments, and locations, while employees can vie
 ### 🔐 Authentication
 - Email-based registration and login
 - JWT-based token authentication
-- Role-based access control (Admin & Employee)
+- Role-based access control (Admin, HR, Manager, and Employee)
 
 ### 👥 Admin Functionality
 - Add, view, update, and delete employees
-- Add departments
+- Add departments and locations
+
+### 🧑‍💼 HR Functionality
+- Add new employees
+
+### 📋 Manager Functionality
+- View all employees
 
 ### 👤 Employee Functionality
 - View own profile
@@ -98,6 +105,16 @@ npm start       # production
 | POST   | `/api/admin/departments` | Add department          |
 | POST   | `/api/admin/locations`   | Add location            |
 
+### 🧑‍💼 HR (requires `role: hr`)
+| Method | Endpoint                 | Description             |
+|--------|--------------------------|-------------------------|
+| POST   | `/api/admin/employees`   | Add new employee        |
+
+### 📋 Manager (requires `role: manager`)
+| Method | Endpoint                 | Description             |
+|--------|--------------------------|-------------------------|
+| GET    | `/api/admin/employees`   | View all employees      |
+
 ### 🙋‍♂️ Employee (requires `role: employee`)
 | Method | Endpoint         | Description               |
 |--------|------------------|---------------------------|
@@ -113,12 +130,13 @@ npm start       # production
 
 ---
 
-
-
 ## 🧑 Author
 
-**Your Name**  
+**Alok Ranjan**  
 [GitHub](https://github.com/alokranjan609)
 
 ---
 
+## 📄 License
+
+This project is licensed under the MIT License.
