@@ -10,16 +10,23 @@ const {
 
 const { verifyToken, restrictTo } = require('../middlewares/auth');
 
-// Protect all routes for admin only
-router.use(verifyToken, restrictTo('admin'));
 
-// Employee management
-router.post('/employees', addEmployee);
-router.get('/employees', getAllEmployees);
-router.put('/employees/:id', updateEmployee);
-router.delete('/employees/:id', deleteEmployee);
+
+
+
+// HR and Admin can add employees
+router.post('/employees', verifyToken, restrictTo('admin', 'hr'), addEmployee);
+
+// Admin and Manager can view all employees
+router.get('/employees', verifyToken, restrictTo('admin', 'manager'), getAllEmployees);
+
+// Only Admin can edit and delete employees
+router.put('/employees/:id', verifyToken, restrictTo('admin'), updateEmployee);
+router.delete('/employees/:id', verifyToken, restrictTo('admin'), deleteEmployee);
+
+
 
 // Department and Location
-router.post('/departments', addDepartment);
+router.post('/departments', verifyToken, restrictTo('admin'), addDepartment);
 
 module.exports = router;
